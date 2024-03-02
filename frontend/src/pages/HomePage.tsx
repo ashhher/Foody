@@ -1,5 +1,4 @@
-import landingImage from "../assets/landing.png";
-import appDownloadImage from "../assets/appDownload.png";
+import { LandingImage, AppDownloadImage } from "@/assets";
 
 const HomePage = () => {
   return (
@@ -11,7 +10,7 @@ const HomePage = () => {
         <span className="text-xl">Food is just a click away!</span>
       </div>
       <div className="grid md:grid-cols-2 gap-5">
-        <img src={landingImage} alt="Landing Image" />
+        <img src={LandingImage} alt="Landing Image" />
         <div className="flex flex-col items-center justify-center gap-4 text-center">
           <span className="font-bold text-3xl tracking-tighter">
             Order takeaway even faster!
@@ -20,7 +19,7 @@ const HomePage = () => {
             Download the FOODY App for faster ordering and personalised
             recommendations
           </span>
-          <img src={appDownloadImage} alt="App Download Image" />
+          <img src={AppDownloadImage} alt="App Download Image" />
         </div>
       </div>
     </div>

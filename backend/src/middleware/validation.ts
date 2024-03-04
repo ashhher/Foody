@@ -13,6 +13,7 @@ const handleValudationErrors = async (
   next();
 };
 
+// user profile validation
 export const validateMyUserRequest = [
   body("name").isString().notEmpty().withMessage("Name must be a string"),
   body("addressLine1")

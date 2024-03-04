@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components";
+import { User } from "@/types";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -25,15 +27,22 @@ const formSchema = z.object({
 type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
-  onSave: (userProfileData: UserFormData) => void;
+  currentUser: User;
   isLoading: boolean;
+  onSave: (userProfileData: UserFormData) => void;
 };
 
-const UserProfileForm = ({ onSave, isLoading }: Props) => {
+const UserProfileForm = ({ currentUser, isLoading, onSave }: Props) => {
   // used for form validation before save
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: currentUser,
   });
+
+  // update form when current user info changes
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>

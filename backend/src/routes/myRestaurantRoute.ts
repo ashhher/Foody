@@ -14,7 +14,10 @@ const upload = multer({
   },
 });
 
-// /api/my/restaurant
+// get restaurant of the current user
+router.get("/", jwtCheck, jwtParse, myRestaurantController.getMyRestaurant);
+
+// create restaurant for current user
 router.post(
   "/",
   jwtCheck,

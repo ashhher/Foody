@@ -1,5 +1,10 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { HomePage, AuthCallbackPage, UserProfilePage } from "@/pages";
+import {
+  HomePage,
+  AuthCallbackPage,
+  UserProfilePage,
+  ManageRestaurantPage,
+} from "@/pages";
 import { ProtectedRoute } from "@/auth";
 
 const AppRoutes = () => {
@@ -10,6 +15,7 @@ const AppRoutes = () => {
       {/* auth protected route */}
       <Route element={<ProtectedRoute />}>
         <Route path="/user-profile" element={<UserProfilePage />} />
+        <Route path="/manage-restaurant" element={<ManageRestaurantPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

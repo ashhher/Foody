@@ -26,7 +26,7 @@ export const useGetMyUser = () => {
   };
 
   const {
-    data: currentUser,
+    data: user,
     isLoading,
     error,
   } = useQuery("fetchCurrentUser", getMyUserRequest);
@@ -36,7 +36,7 @@ export const useGetMyUser = () => {
   }
 
   return {
-    currentUser,
+    user,
     isLoading,
   };
 };

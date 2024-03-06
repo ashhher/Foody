@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Form, LoadingButton, Separator } from "@/components";
+import { Restaurant } from "@/types";
 import DetailsSection from "./DetailsSections";
 import CuisinesSection from "./CuisineSection";
 import MenuSection from "./MenuSection";
@@ -46,11 +48,12 @@ const formSchema = z
 type RestaurantFormData = z.infer<typeof formSchema>;
 
 type Props = {
+  restaurant?: Restaurant;
   isLoading: boolean;
   onSave: (restaurantFormData: FormData) => void;
 };
 
-const ManageRestaurantForm = ({ isLoading, onSave }: Props) => {
+const ManageRestaurantForm = ({ restaurant, isLoading, onSave }: Props) => {
   const form = useForm<RestaurantFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,6 +61,30 @@ const ManageRestaurantForm = ({ isLoading, onSave }: Props) => {
       menuItems: [{ name: "", price: 0 }],
     },
   });
+
+  useEffect(() => {
+    if (!restaurant) {
+      return;
+    }
+
+    // price lowest domination transfer
+    const deliveryPriceFormatted = parseInt(
+      (restaurant.deliveryPrice / 100).toFixed(2)
+    );
+
+    const menuItemsFormatted = restaurant.menuItems.map((item) => ({
+      ...item,
+      price: parseInt((item.price / 100).toFixed(2)),
+    }));
+
+    const updatedRestaurant = {
+      ...restaurant,
+      deliveryPrice: deliveryPriceFormatted,
+      menuItems: menuItemsFormatted,
+    };
+
+    form.reset(updatedRestaurant);
+  }, [form, restaurant]);
 
   const onSubmit = (formDataJson: RestaurantFormData) => {
     // convert formDataJson to a new FormData object

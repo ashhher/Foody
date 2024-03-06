@@ -9,3 +9,4 @@ export { default as MainNav } from "./MainNav";
 export { default as MobileNav } from "./MobileNav";
 export { default as MobileNavLinks } from "./MobileNavLinks";
 export { default as UsernameMenu } from "./UsernameMenu";
+export { default as SearchBar } from "./SearchBar";

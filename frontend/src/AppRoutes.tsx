@@ -4,6 +4,7 @@ import {
   AuthCallbackPage,
   UserProfilePage,
   ManageRestaurantPage,
+  SearchPage,
 } from "@/pages";
 import { ProtectedRoute } from "@/auth";
 
@@ -12,6 +13,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
+      <Route path="/search/:city" element={<SearchPage />} />
       {/* auth protected route */}
       <Route element={<ProtectedRoute />}>
         <Route path="/user-profile" element={<UserProfilePage />} />

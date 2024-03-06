@@ -41,7 +41,7 @@ const formSchema = z
     imageFile: z.instanceof(File, { message: "Image is required" }).optional(),
   })
   .refine((data) => data.imageUrl || data.imageFile, {
-    message: "Either image URL or image File must be provided",
+    message: "Image File is required",
     path: ["imageFile"],
   });
 

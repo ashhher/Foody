@@ -8,3 +8,4 @@ export * from "./label";
 export * from "./sonner";
 export * from "./checkbox";
 export * from "./aspect-ratio";
+export * from "./pagination";

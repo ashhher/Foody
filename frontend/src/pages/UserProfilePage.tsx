@@ -18,8 +18,10 @@ const UserProfilePage = () => {
     <Layout>
       <UserProfileForm
         currentUser={user}
-        onSave={updateUser}
         isLoading={isUpdateUserLoading}
+        title={"User Profile Form"}
+        buttonText={"Submit"}
+        onSave={updateUser}
       />
     </Layout>
   );

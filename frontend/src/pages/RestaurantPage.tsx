@@ -8,15 +8,16 @@ import {
   MenuItemCard,
   RestaurantInfoCard,
 } from "@/components";
-import { MenuItem, CartItem } from "@/types";
+import { MenuItem, CartItem, CheckoutSessionRequest } from "@/types";
 import { UserFormData } from "@/components/forms/user-profile-form/UserProfileForm";
 import { updateCartSession } from "@/utils";
+import { useCreateCheckoutSession } from "@/api/OrderApi";
 
 const RestaurantPage = () => {
   const { restaurantId } = useParams();
   const { restaurant, isLoading } = useGetRestaurant(restaurantId);
-  // const { createCheckoutSession, isLoading: isCheckoutLoading } =
-  //   useCreateCheckoutSession();
+  const { createCheckoutSession, isLoading: isCheckoutLoading } =
+    useCreateCheckoutSession();
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     // init cart from session storage
@@ -78,7 +79,7 @@ const RestaurantPage = () => {
       return;
     }
 
-    const checkoutData = {
+    const checkoutData: CheckoutSessionRequest = {
       cartItems: cartItems.map((cartItem) => ({
         menuItemId: cartItem._id,
         name: cartItem.name,
@@ -94,10 +95,8 @@ const RestaurantPage = () => {
       },
     };
 
-    console.log(checkoutData);
-
-    //   const data = await createCheckoutSession(checkoutData);
-    //   window.location.href = data.url;
+    const data = await createCheckoutSession(checkoutData);
+    window.location.href = data.url;
   };
 
   if (isLoading || !restaurant) {
@@ -135,7 +134,7 @@ const RestaurantPage = () => {
             <CheckoutCard
               restaurant={restaurant}
               cartItems={cartItems}
-              isCheckoutLoading={false}
+              isCheckoutLoading={isCheckoutLoading}
               removeFromCart={removeFromCart}
               handleCheckout={onCheckout}
             />

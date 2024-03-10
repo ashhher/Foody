@@ -16,6 +16,7 @@ type CheckoutSessionRequest = {
     name: string;
     addressLine1: string;
     city: string;
+    country: string;
   };
   restaurantId: string;
 };

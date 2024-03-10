@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
 import myUserRoute from "./routes/myUserRoute";
 import myRestaurantRoute from "./routes/myRestaurantRoute";
-import restaurantRoute from "./routes/RestaurantRoute";
-import orderRoute from "./routes/OrderRoute";
+import restaurantRoute from "./routes/restaurantRoute";
+import orderRoute from "./routes/orderRoute";
 
 // 1. connect to mongoDB database
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => {
@@ -22,10 +22,14 @@ cloudinary.config({
 
 // 3. init express
 const app = express();
-app.use(express.json());
 app.use(cors());
 
 // 4. api
+
+// for stripe validation, so not json()
+app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
+app.use(express.json());
+
 // check server health
 app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });

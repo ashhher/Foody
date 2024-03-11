@@ -28,7 +28,7 @@ export const useGetMyOrders = () => {
     "fetchMyOrders",
     getMyOrdersRequest,
     {
-      refetchInterval: 5000,
+      refetchInterval: 5000, // polling order data
     }
   );
 

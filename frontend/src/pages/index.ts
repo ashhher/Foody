@@ -4,3 +4,4 @@ export { default as UserProfilePage } from "./UserProfilePage";
 export { default as ManageRestaurantPage } from "./ManageRestaurantPage";
 export { default as SearchPage } from "./SearchPage";
 export { default as RestaurantPage } from "./RestaurantPage";
+export { default as OrderStatusPage } from "./OrderStatusPage";

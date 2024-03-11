@@ -5,7 +5,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components";
-import { cuisineList } from "@/config";
+import { CUISINE_LIST } from "@/config";
 import CuisineCheckbox from "./CuisineCheckbox";
 
 const CuisinesSection = () => {
@@ -25,7 +25,7 @@ const CuisinesSection = () => {
         render={({ field }) => (
           <FormItem>
             <div className="grid md:grid-cols-5 gap-1">
-              {cuisineList.map((cuisineItem, index) => (
+              {CUISINE_LIST.map((cuisineItem, index) => (
                 <CuisineCheckbox
                   key={index}
                   cuisine={cuisineItem}

@@ -6,6 +6,7 @@ import {
   ManageRestaurantPage,
   SearchPage,
   RestaurantPage,
+  OrderStatusPage,
 } from "@/pages";
 import { ProtectedRoute } from "@/auth";
 
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute />}>
         <Route path="/user-profile" element={<UserProfilePage />} />
         <Route path="/manage-restaurant" element={<ManageRestaurantPage />} />
+        <Route path="/order-status" element={<OrderStatusPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

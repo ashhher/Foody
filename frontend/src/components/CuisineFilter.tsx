@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { Button, Label } from ".";
-import { cuisineList } from "@/config/restaurant-options-config";
+import { CUISINE_LIST } from "@/config";
 
 type Props = {
   onChange: (cuisines: string[]) => void;
@@ -42,9 +42,8 @@ const CuisineFilter = ({
       </div>
 
       <div className="space-y-2 flex flex-col">
-        {cuisineList
-          .slice(0, isExpanded ? cuisineList.length : 7)
-          .map((cuisine) => {
+        {CUISINE_LIST.slice(0, isExpanded ? CUISINE_LIST.length : 7).map(
+          (cuisine) => {
             const isSelected = selectedCuisines.includes(cuisine);
             return (
               <div className="flex">
@@ -70,7 +69,8 @@ const CuisineFilter = ({
                 </Label>
               </div>
             );
-          })}
+          }
+        )}
 
         <Button
           onClick={onExpandedClick}

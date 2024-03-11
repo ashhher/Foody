@@ -20,3 +20,5 @@ export { default as MenuItemCard } from "./MenuItemCard";
 export { default as CheckoutCard } from "./CheckoutCard";
 export { default as CheckoutItem } from "./CheckoutItem";
 export { default as CheckoutButton } from "./CheckoutButton";
+export { default as OrderStatusHeader } from "./OrderStatusHeader";
+export { default as OrderStatusDetail } from "./OrderStatusDetail";

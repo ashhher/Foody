@@ -22,3 +22,4 @@ export { default as CheckoutItem } from "./CheckoutItem";
 export { default as CheckoutButton } from "./CheckoutButton";
 export { default as OrderStatusHeader } from "./OrderStatusHeader";
 export { default as OrderStatusDetail } from "./OrderStatusDetail";
+export { default as OrderItemCard } from "./OrderItemCard";

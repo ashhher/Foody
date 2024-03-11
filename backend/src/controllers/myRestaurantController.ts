@@ -17,24 +17,6 @@ const getMyRestaurant = async (req: Request, res: Response) => {
   }
 };
 
-const getRestaurantOrders = async (req: Request, res: Response) => {
-  try {
-    const restaurant = await Restaurant.findOne({ user: req.userId });
-    if (!restaurant) {
-      return res.status(404).json({ message: "Restaurant not found" });
-    }
-
-    const orders = await Order.find({ restaurant: restaurant._id })
-      .populate("restaurant")
-      .populate("user");
-
-    res.json(orders);
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).json({ message: "Error getting orders" });
-  }
-};
-
 const createMyRestaurant = async (req: Request, res: Response) => {
   try {
     // 1. check if the restaurant exists in current user
@@ -117,9 +99,56 @@ const uploadImage = async (file: Express.Multer.File) => {
   return uploadResponse.url;
 };
 
+const getRestaurantOrders = async (req: Request, res: Response) => {
+  try {
+    const restaurant = await Restaurant.findOne({ user: req.userId });
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+
+    const orders = await Order.find({ restaurant: restaurant._id })
+      .populate("restaurant")
+      .populate("user");
+
+    res.json(orders);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error getting orders" });
+  }
+};
+
+const updateOrderStatus = async (req: Request, res: Response) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    // check if the restaurant belongs to the user who send the request
+    const restaurant = await Restaurant.findById(order.restaurant);
+
+    if (restaurant?.user?._id.toString() !== req.userId) {
+      return res.status(401).send();
+    }
+
+    order.status = status;
+    await order.save();
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error updating order status" });
+  }
+};
+
 export default {
   getMyRestaurant,
-  getRestaurantOrders,
   createMyRestaurant,
   updateMyRestaurant,
+  getRestaurantOrders,
+  updateOrderStatus,
 };

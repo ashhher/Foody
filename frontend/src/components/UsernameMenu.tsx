@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CircleUserRound } from "lucide-react";
+import { useLogout } from "@/hooks";
 import {
   Button,
   DropdownMenu,
@@ -11,9 +12,8 @@ import {
 } from "@/components";
 
 const UsernameMenu = () => {
-  const { user, logout } = useAuth0();
-
-  const handleClickLogout = () => logout();
+  const { user } = useAuth0();
+  const logout = useLogout();
 
   return (
     <DropdownMenu>
@@ -38,7 +38,7 @@ const UsernameMenu = () => {
         <Separator />
         <DropdownMenuItem>
           <Button
-            onClick={handleClickLogout}
+            onClick={logout}
             className="flex flex-1 font-bold bg-orange-500"
           >
             Log Out

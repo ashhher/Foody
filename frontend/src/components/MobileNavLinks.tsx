@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useLogout } from "@/hooks";
 import { Button } from "@/components";
 
 const MobileNavLinks = () => {
-  const { logout } = useAuth0();
-
-  const handleClickLogout = () => logout();
+  const logout = useLogout();
 
   return (
     <>
@@ -29,7 +27,7 @@ const MobileNavLinks = () => {
       </Link>
       <Button
         className="flex items-center px-3 font-bold hover:bg-gray-500"
-        onClick={handleClickLogout}
+        onClick={logout}
       >
         Log Out
       </Button>

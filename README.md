@@ -55,6 +55,8 @@
 - Put user data into store
 - Update authentication to provider
 - Fix aspect ratio
+- Optimise using env variables
+- ~~Logout callback error~~
 
 ## Deployment 🛠️
 
